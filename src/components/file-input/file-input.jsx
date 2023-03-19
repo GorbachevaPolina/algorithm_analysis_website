@@ -1,33 +1,55 @@
 import React, {FC, useRef, useState} from "react";
 import { test } from "../../test";
+import { useDispatch } from 'react-redux'
+import { SET_CALCULATIONS_FILE } from "../../services/actions/calculations-file";
+import InputFields from '../input-fields/input-fields'
 
 const FileInput = () => {
-    const [file, setFile] = useState()
+    const [isFileSet, setIsFileSet] = useState(false)
+    const [isBtnPressed, setIsBtnPressed] = useState(false)
+    const dispatch = useDispatch()
 
-    const testFunc = async () => {
-        await test(file)
-      }
+    // const testFunc = async () => {
+    //     await test(file)
+    //   }
 
     const readFile = async (e) => {
         e.preventDefault()
         const reader = new FileReader()
         reader.onload = async (e) => { 
             const text = (e.target.result)
-            console.log(text)
-            setFile(text)
+            const result_arrays = text.split('\r')
+            const input_length_values = result_arrays.filter((item, idx) => idx % 2 === 0).map(item => item.trim())
+            const results = result_arrays.filter((item, idx) => idx % 2 !== 0).map(item => item.trim().split(" "))
+            dispatch({
+                type: SET_CALCULATIONS_FILE,
+                input_length_values,
+                results
+            })
+            setIsFileSet(true)
         };
         reader.readAsText(e.target.files[0])
     }
     
     return (
-        <>
+        <div>
+            <p>Приложите файл с результатами экспериментов</p>
             <input 
                 type="file"
                 name="file"
                 onChange={e => readFile(e)}
             />
-            <button onClick={testFunc}>click me</button>
-        </>
+            <button onClick={() => setIsBtnPressed(true)}>Далее</button>
+            {
+                isFileSet ? 
+                    isBtnPressed ?
+                    (<InputFields />) :
+                    null :
+                    isBtnPressed ?
+                    <p>Сначала приложите файл</p> :
+                    null
+            }
+        </div>
     )
 }
  export default FileInput

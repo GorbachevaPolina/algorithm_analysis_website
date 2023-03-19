@@ -4,9 +4,9 @@ import FileInput from './components/file-input/file-input';
 import { test } from './test';
 
 function App() {
-  const testFunc = async () => {
-    await test()
-  }
+  // const testFunc = async () => {
+  //   await test()
+  // }
 
   return (
     <div className="App">
