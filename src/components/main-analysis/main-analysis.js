@@ -8,7 +8,8 @@ const MainAnalysis = () => {
     const [isDone, setIsDone] = useState(false)
 
     const startAnalysis = async () => {
-        await analysis(parameters).then(() => setIsDone(true))
+        let results = await analysis(parameters)
+        console.log(results)
     }
 
     useEffect(() => {

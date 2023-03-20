@@ -16,7 +16,7 @@ export const calculationsFileReducer = (state = initialState, action) => {
         case SET_CALCULATIONS_FILE: {
             return {
                 ...state,
-                input_lengths: action.input_length_values,
+                input_lengths: action.input_length_values.filter(item => item !== ""),
                 results: action.results
             }
         }
