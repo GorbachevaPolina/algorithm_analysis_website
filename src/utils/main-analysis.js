@@ -42,24 +42,40 @@ export const analysis = async (params) => {
     let regression_min = regression.exponential(min_regression_data, {precision: 15})
     let regression_max = regression.exponential(max_regression_data, {precision: 15})
 
-    let count = +right_segment_exp + +step;
+    let count = +left_segment;
+    let t_regression = [], s_regression = [], min_regression = [], max_regression = []
     while (count <= +right_segment_res) {
-        t.push(regression_t.predict(count)[1])
-        s.push(regression_s.predict(count)[1])
+        t_regression.push(regression_t.predict(count)[1])
+        s_regression.push(regression_s.predict(count)[1])
 
-        min_array.push(regression_min.predict(count)[1])
-        max_array.push(regression_max.predict(count)[1])
+        min_regression.push(regression_min.predict(count)[1])
+        max_regression.push(regression_max.predict(count)[1])
 
         count += +step
     }
 
     let alpha = [], beta = [], x_gamma = [], f_gamma = []
-    for (let i = 0; i < t.length; i++) {
-        alpha.push(t[i] / s[i] * (t[i] - t[i] * t[i] - s[i]))
-        beta.push((1-t[i]) / s[i] * (t[i] - t[i] * t[i] - s[i]))
+    for (let i = 0; i < t_regression.length; i++) {
+        alpha.push(t_regression[i] / s_regression[i] * (t_regression[i] - t_regression[i] * t_regression[i] - s_regression[i]))
+        beta.push((1-t_regression[i]) / s_regression[i] * (t_regression[i] - t_regression[i] * t_regression[i] - s_regression[i]))
         x_gamma.push(quantile(+probability, alpha[i], beta[i]))
-        f_gamma.push(min_array[i] + x_gamma[i] * (max_array[i] - min_array[i]))
+        f_gamma.push(min_regression[i] + x_gamma[i] * (max_regression[i] - min_regression[i]))
     }
 
-    return [alpha, beta, x_gamma, f_gamma]
+    let result_data = [];
+    count = 0
+    for (let i = +left_segment; i <= +right_segment_res; i += +step) {
+        result_data.push({
+            name: i,
+            alpha: alpha[count],
+            beta: beta[count],
+            x_gamma: x_gamma[count],
+            f_gamma: f_gamma[count],
+            max_regression: max_regression[count]
+        })
+        count++;
+    }
+
+
+    return result_data
 }
