@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { SET_ANALYSIS_PARAMETERS } from '../../services/actions/calculations-file'
 import MainAnalysis from '../main-analysis/main-analysis'
+import "./input-fields.scss"
 
 const InputFields = () => {
     const dispatch = useDispatch()
@@ -23,7 +24,7 @@ const InputFields = () => {
     }
 
     return(
-        <div>
+        <div className='input-fields-container'>
             <p>Введите параметры, необходимые для анализа.</p>
             <p>
                 <span>Левое значение сегмента: </span>

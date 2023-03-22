@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
-import './App.css';
-import FileInput from './components/file-input/file-input';
-import { test } from './test';
+import './app.scss';
+import FileInput from '../file-input/file-input';
+// import { test } from './test';
 
 function App() {
   // const testFunc = async () => {
@@ -9,7 +9,7 @@ function App() {
   // }
 
   return (
-    <div className="App">
+    <div className="app-container">
       <FileInput />
       {/* <button onClick={testFunc}>Hey</button> */}
     </div>

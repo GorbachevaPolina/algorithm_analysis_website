@@ -3,6 +3,7 @@ import { test } from "../../test";
 import { useDispatch } from 'react-redux'
 import { SET_CALCULATIONS_FILE } from "../../services/actions/calculations-file";
 import InputFields from '../input-fields/input-fields'
+import './file-input.scss'
 
 const FileInput = () => {
     const [isFileSet, setIsFileSet] = useState(false)
@@ -32,21 +33,24 @@ const FileInput = () => {
     }
     
     return (
-        <div>
-            <p>Приложите файл с результатами экспериментов</p>
-            <input 
+        <div className="file-input-container">
+            <p className="result-p">Приложите файл с результатами экспериментов:</p>
+            <div className="input-container">
+                <input 
                 type="file"
                 name="file"
                 onChange={e => readFile(e)}
-            />
-            <button onClick={() => setIsBtnPressed(true)}>Далее</button>
+                />
+            </div>
+            <br/>
+            {isBtnPressed ? null: <button onClick={() => setIsBtnPressed(true)}>Далее</button>}
             {
                 isFileSet ? 
                     isBtnPressed ?
                     (<InputFields />) :
                     null :
                     isBtnPressed ?
-                    <p>Сначала приложите файл</p> :
+                    <p className="warning-message">Сначала приложите файл</p> :
                     null
             }
         </div>

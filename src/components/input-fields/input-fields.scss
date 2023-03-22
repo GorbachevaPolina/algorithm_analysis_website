@@ -1,0 +1,10 @@
+.input-fields-container {
+    input {
+        outline: 0;
+        border-width: 0 0 2px;
+        border-color: #e2f6ff;
+    }
+    input:focus {
+        border-color: #cfe2ea;
+      }
+}
