@@ -4,6 +4,11 @@
     box-shadow: 5px 5px 10px rgba(193,221,234, 0.5);
     padding: 50px;
 
+    top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+
     .result-p {
         font-size: 1.3rem;
     }

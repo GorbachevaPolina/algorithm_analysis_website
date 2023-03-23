@@ -72,11 +72,11 @@ const InputFields = () => {
                 />
             </p>
             <button onClick={startAnalysis}>Провести анализ</button>
-            {
+            {/* {
                 analysisStarted ?
                 <MainAnalysis /> :
                 null
-            }
+            } */}
         </div>
     )
 }

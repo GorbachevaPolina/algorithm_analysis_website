@@ -8,7 +8,9 @@ const initialState = {
     right_segment_exp: null,
     right_segment_res: null,
     step: null,
-    probability: null
+    probability: null,
+
+    analysisStarted: false
 }
 
 export const calculationsFileReducer = (state = initialState, action) => {
@@ -27,7 +29,8 @@ export const calculationsFileReducer = (state = initialState, action) => {
                 right_segment_exp: action.inputs.right_segment_exp,
                 right_segment_res: action.inputs.right_segment_res,
                 step: action.inputs.step,
-                probability: action.inputs.probability
+                probability: action.inputs.probability,
+                analysisStarted: true
             }
         }
         default: {

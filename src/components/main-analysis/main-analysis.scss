@@ -1,0 +1,31 @@
+.results-container {
+    height: 100%;
+}
+
+.graph-container {
+    height: 1000px;
+}
+
+.left-graph {
+    float: left;
+    margin: 20px 0 30px 10px;
+}
+
+.right-graph {
+    float: right;
+    margin: 20px 50px 30px 0;
+}
+
+table {
+    left: 50%;
+    position: relative;
+    transform: translate(-50%);
+}
+
+table, th, td {
+    border: 1px solid;
+}
+
+th, td {
+    padding: 10px;
+}
