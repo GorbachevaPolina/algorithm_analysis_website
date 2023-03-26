@@ -17,6 +17,7 @@ export const analysis = async (params) => {
     let min_array = [], max_array = []
     for (let i = 0; i < results.length; i++) {
         min_array.push(Math.min(...results[i]))
+        // min_array.push(Math.min(...results[i].filter(item => +item)));
         max_array.push(Math.max(...results[i]))
         normalised_results.push(results[i].map((item) => {
             return (item - min_array[i]) / (max_array[i] - min_array[i])

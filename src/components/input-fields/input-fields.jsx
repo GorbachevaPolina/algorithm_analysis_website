@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { SET_ANALYSIS_PARAMETERS } from '../../services/actions/calculations-file'
 import MainAnalysis from '../main-analysis/main-analysis'
 import "./input-fields.scss"
+import { Link } from 'react-router-dom'
 
 const InputFields = () => {
     const dispatch = useDispatch()
@@ -71,7 +72,9 @@ const InputFields = () => {
                     onChange={(e) => setInputs({...inputs, probability: e.target.value})}
                 />
             </p>
+            <Link to="/main-analysis">
             <button onClick={startAnalysis}>Провести анализ</button>
+            </Link>
             {/* {
                 analysisStarted ?
                 <MainAnalysis /> :
