@@ -1,9 +1,9 @@
-# Автоматизированная система для доверительного анализа алгоритмов
+# Automated system for evaluating the algorithm complexity
 
-## Описание
-Система разработана в рамках написания выпускной квалификационной работы. Система принимает на вход файл с данными и проводит доверительный анализ трудоемкости алгоритма. Выходные данные - графики альфа и бета параметров бета-распределения, левого квантиля бета-распределения и доверительной трудоемкости.
+## Description
+The system is created for final qualifying work. The system accepts a file with data and completes confidence analysis of algorithm complexity. Output data - graphs of alpha, beta, left quantile of beta distribution and complexity. 
 
-## Технологии
+## Technologies
 * React
 * Redux
-* Библиотеки: recharts, regression, simple-statistics
+* Libraries: recharts, regression, simple-statistics
