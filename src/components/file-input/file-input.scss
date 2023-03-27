@@ -1,13 +1,7 @@
-.file-input-container {
-    border: 1px solid #c1ddea;
-    border-radius: 5px;
-    box-shadow: 5px 5px 10px rgba(193,221,234, 0.5);
-    padding: 50px;
+@import "../../styles/mixins.scss";
 
-    top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
+.file-input-container {
+    @include container;
 
     .result-p {
         font-size: 1.3rem;
@@ -19,20 +13,21 @@
     }
 
     button {
-        left: 50%;
-        position: relative;
-        transform: translate(-50%);
-        background-color: #e2f6ff;
-        border: none;
-        border-radius: 5px;
-        padding: 5px 15px;
-        font-size: 1.1rem;
-        transition: .5s;
+        @include button;
+        // left: 50%;
+        // position: relative;
+        // transform: translate(-50%);
+        // background-color: #e2f6ff;
+        // border: none;
+        // border-radius: 5px;
+        // padding: 5px 15px;
+        // font-size: 1.1rem;
+        // transition: .5s;
 
-        &:hover {
-            cursor: pointer;
-            background-color: #cfe2ea;
-        }
+        // &:hover {
+        //     cursor: pointer;
+        //     background-color: #cfe2ea;
+        // }
     }
 
     .input-container {

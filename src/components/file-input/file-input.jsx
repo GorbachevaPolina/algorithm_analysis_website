@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { SET_CALCULATIONS_FILE } from "../../services/actions/calculations-file";
 import InputFields from '../input-fields/input-fields'
 import './file-input.scss'
+import { Link } from "react-router-dom";
 
 const FileInput = () => {
     const [isFileSet, setIsFileSet] = useState(false)
@@ -43,8 +44,8 @@ const FileInput = () => {
                 />
             </div>
             <br/>
-            {isBtnPressed ? null: <button onClick={() => setIsBtnPressed(true)}>Далее</button>}
-            {
+            {!isFileSet ? null : <Link to="/main-analysis-input-fields"><button>Далее</button></Link>}
+            {/* {
                 isFileSet ? 
                     isBtnPressed ?
                     (<InputFields />) :
@@ -52,7 +53,7 @@ const FileInput = () => {
                     isBtnPressed ?
                     <p className="warning-message">Сначала приложите файл</p> :
                     null
-            }
+            } */}
         </div>
     )
 }

@@ -32,12 +32,13 @@ const MainAnalysis = () => {
 
     return(
         <div className="results-container">
+            {console.log(canAnalyse, isDone)}
             {
-                canAnalyse ? 
+                canAnalyse === false ? 
+                    <p>Ошибка в параметрах.</p> :
                     isDone ?
                     null :
-                    <p>Пожалуйста, подождите. Проходит анализ</p> :
-                    <p>Ошибка в параметрах.</p>
+                    <p>Пожалуйста, подождите. Проходит анализ</p> 
             }
             {
                 resultData ?

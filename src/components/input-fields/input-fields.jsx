@@ -26,7 +26,7 @@ const InputFields = () => {
 
     return(
         <div className='input-fields-container'>
-            <p>Введите параметры, необходимые для анализа.</p>
+            <p className='title'>Введите параметры, необходимые для анализа.</p>
             <p>
                 <span>Левое значение сегмента: </span>
                 <input 

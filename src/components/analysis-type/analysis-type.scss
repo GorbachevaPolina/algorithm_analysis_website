@@ -1,0 +1,23 @@
+@import '../../styles/mixins.scss';
+
+.choice-container {
+    @include container;
+
+    .title {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    .link {
+        text-decoration: none;
+        color: #5391ab;
+        font-size: 1.2rem;
+        transition: .5s;
+
+        &:hover {
+            // border-bottom: 1px solid;
+            color: white;
+            background-color: #5391ab;
+        }
+    }
+}
