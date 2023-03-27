@@ -12,11 +12,6 @@
     }
 
     input {
-        outline: 0;
-        border-width: 0 0 2px;
-        border-color: #e2f6ff;
+        @include input;
     }
-    input:focus {
-        border-color: #cfe2ea;
-      }
 }

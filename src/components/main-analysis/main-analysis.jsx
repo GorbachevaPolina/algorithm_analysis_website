@@ -32,7 +32,6 @@ const MainAnalysis = () => {
 
     return(
         <div className="results-container">
-            {console.log(canAnalyse, isDone)}
             {
                 canAnalyse === false ? 
                     <p>Ошибка в параметрах.</p> :

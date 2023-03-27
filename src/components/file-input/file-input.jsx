@@ -2,20 +2,21 @@ import React, {FC, useRef, useState} from "react";
 import { test } from "../../test";
 import { useDispatch } from 'react-redux'
 import { SET_CALCULATIONS_FILE } from "../../services/actions/calculations-file";
+import { SET_FILE } from "../../services/actions/pre-analysis";
 import InputFields from '../input-fields/input-fields'
 import './file-input.scss'
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const FileInput = () => {
     const [isFileSet, setIsFileSet] = useState(false)
-    const [isBtnPressed, setIsBtnPressed] = useState(false)
     const dispatch = useDispatch()
+    let location = useLocation();
 
     // const testFunc = async () => {
     //     await test(file)
     //   }
 
-    const readFile = async (e) => {
+    const readMainFile = async (e) => {
         e.preventDefault()
         const reader = new FileReader()
         reader.onload = async (e) => { 
@@ -32,6 +33,21 @@ const FileInput = () => {
         };
         reader.readAsText(e.target.files[0])
     }
+
+    const readPreFile = async (e) => {
+        e.preventDefault()
+        const reader = new FileReader()
+        reader.onload = async (e) => { 
+            const text = (e.target.result)
+            const results = text.split(' ').filter(item => item !== "")
+            dispatch({
+                type: SET_FILE,
+                results
+            })
+            setIsFileSet(true)
+        };
+        reader.readAsText(e.target.files[0])
+    }
     
     return (
         <div className="file-input-container">
@@ -40,20 +56,11 @@ const FileInput = () => {
                 <input 
                 type="file"
                 name="file"
-                onChange={e => readFile(e)}
+                onChange={e => location.state?.fromMain ? readMainFile(e) : readPreFile(e)}
                 />
             </div>
             <br/>
-            {!isFileSet ? null : <Link to="/main-analysis-input-fields"><button>Далее</button></Link>}
-            {/* {
-                isFileSet ? 
-                    isBtnPressed ?
-                    (<InputFields />) :
-                    null :
-                    isBtnPressed ?
-                    <p className="warning-message">Сначала приложите файл</p> :
-                    null
-            } */}
+            {!isFileSet ? null : <Link to={{pathname: location.state?.fromMain ? "/main-analysis-input-fields" : "/pre-analysis-input-fields"}}><button>Далее</button></Link>}
         </div>
     )
 }
