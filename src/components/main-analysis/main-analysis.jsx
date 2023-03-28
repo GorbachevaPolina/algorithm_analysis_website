@@ -11,7 +11,7 @@ const MainAnalysis = () => {
     const [resultData, setResultData] = useState(null)
 
     const startAnalysis = async () => {
-        await setCanAnalyse(true)
+        setCanAnalyse(true)
         let results = await analysis(parameters)
         setResultData(results)
         setIsDone(true)

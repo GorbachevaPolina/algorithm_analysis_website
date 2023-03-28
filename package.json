@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@stdlib/math-base-special-betainc": "0.0.6",
     "@stdlib/stats-base-dists-beta-quantile": "0.0.7",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
