@@ -19,7 +19,8 @@ const InputFields = () => {
     const startAnalysis = () => {
         dispatch({
             type: SET_ANALYSIS_PARAMETERS,
-            inputs
+            inputs,
+            started: true
         })
         setAnalysisStarted(true)
     }

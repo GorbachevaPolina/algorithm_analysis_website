@@ -1,9 +1,7 @@
 import { SET_FILE, SET_PRE_ANALYSIS_PARAMETER } from "../actions/pre-analysis"
 
 const initialState = {
-    results: null,
-
-    input_length: null
+    results: null
 }
 
 export const preAnalysisReducer = (state = initialState, action) => {
@@ -12,12 +10,6 @@ export const preAnalysisReducer = (state = initialState, action) => {
             return {
                 ...state,
                 results: action.results
-            }
-        }
-        case SET_PRE_ANALYSIS_PARAMETER: {
-            return {
-                ...state,
-                input_length: action.input
             }
         }
         default: {

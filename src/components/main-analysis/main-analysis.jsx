@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { analysis } from "../../utils/main-analysis";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import './main-analysis.scss'
+import { Link } from "react-router-dom";
+import { SET_ANALYSIS_PARAMETERS, SET_CALCULATIONS_FILE } from "../../services/actions/calculations-file";
+import { SET_FILE } from "../../services/actions/pre-analysis";
 
 const MainAnalysis = () => {
     const parameters = useSelector((store) => store.calculationsFile)
+    const dispatch = useDispatch()
     const [canAnalyse, setCanAnalyse] = useState(null)
     const [isDone, setIsDone] = useState(false)
     const [resultData, setResultData] = useState(null)
@@ -15,6 +19,28 @@ const MainAnalysis = () => {
         let results = await analysis(parameters)
         setResultData(results)
         setIsDone(true)
+    }
+
+    const clearData = () => {
+        dispatch({
+            type: SET_CALCULATIONS_FILE,
+            results: null
+        })
+        dispatch({
+            type: SET_ANALYSIS_PARAMETERS,
+            inputs: {
+                left_segment: null,
+                right_segment_exp: null,
+                right_segment_res: null,
+                step: null,
+                probability: null
+            },
+            started: false
+        })
+        dispatch({
+            type: SET_FILE,
+            results: null
+        })
     }
 
     useEffect(() => {
@@ -43,6 +69,7 @@ const MainAnalysis = () => {
                 resultData ?
                 (
                     <>
+                    <Link to="/"><button onClick={clearData}>На главную страницу</button></Link>
                     <div className="graph-container">
                     <ResponsiveContainer width="45%" height="45%" className="left-graph">
                         <LineChart
@@ -97,6 +124,7 @@ const MainAnalysis = () => {
                     <table>
                         <thead>
                         <tr>
+                            <th>Длина входа</th>
                             <th>Трудоемкость в худшем случае</th>
                             <th>Доверительная трудоемкость</th>
                         </tr>
@@ -106,6 +134,7 @@ const MainAnalysis = () => {
                                 resultData.map((item, index) => {
                                     return (
                                         <tr key={index}>
+                                            <td>{item.name}</td>
                                             <td>{item.max_regression}</td>
                                             <td>{item.f_gamma}</td>
                                         </tr>

@@ -2,8 +2,7 @@ import * as stat from 'simple-statistics'
 var betainc = require( '@stdlib/math-base-special-betainc' );
 var chiSquaredTest = require('chi-squared-test');
 
-export const analysis = async (params) => {
-    const { input_length, results } = params;
+export const analysis = async (results) => {
 
     let min_value = Math.min(...results);
     let max_value = Math.max(...results);

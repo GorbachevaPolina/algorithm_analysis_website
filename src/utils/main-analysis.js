@@ -4,7 +4,6 @@ let quantile = require( '@stdlib/stats-base-dists-beta-quantile' );
 
 export const analysis = async (params) => {
     let {
-        input_lengths,
         left_segment,
         probability,
         results,
@@ -13,6 +12,10 @@ export const analysis = async (params) => {
         step
     } = params;
 
+    let input_lengths = []
+    for (let i = 0; i < (+right_segment_exp - +left_segment + 1); i+=+step) {
+        input_lengths.push(i)
+    }
     let normalised_results = []
     let min_array = [], max_array = []
     for (let i = 0; i < results.length; i++) {

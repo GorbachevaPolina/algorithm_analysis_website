@@ -1,7 +1,6 @@
 import { SET_ANALYSIS_PARAMETERS, SET_CALCULATIONS_FILE } from "../actions/calculations-file"
 
 const initialState = {
-    input_lengths: null,
     results: null,
 
     left_segment: null,
@@ -18,7 +17,6 @@ export const calculationsFileReducer = (state = initialState, action) => {
         case SET_CALCULATIONS_FILE: {
             return {
                 ...state,
-                input_lengths: action.input_length_values.filter(item => item !== ""),
                 results: action.results
             }
         }
@@ -30,7 +28,7 @@ export const calculationsFileReducer = (state = initialState, action) => {
                 right_segment_res: action.inputs.right_segment_res,
                 step: action.inputs.step,
                 probability: action.inputs.probability,
-                analysisStarted: true
+                analysisStarted: action.started
             }
         }
         default: {

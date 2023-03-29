@@ -22,11 +22,12 @@ const FileInput = () => {
         reader.onload = async (e) => { 
             const text = (e.target.result)
             const result_arrays = text.split('\r')
-            const input_length_values = result_arrays.filter((item, idx) => idx % 2 === 0).map(item => item.trim())
-            const results = result_arrays.filter((item, idx) => idx % 2 !== 0).map(item => item.trim().split(" "))
+            const input_length_values = []
+            // const input_length_values = result_arrays.filter((item, idx) => idx % 2 === 0).map(item => item.trim())
+            // const results = result_arrays.filter((item, idx) => idx % 2 !== 0).map(item => item.trim().split(" "))
+            const results = result_arrays.map(item => item.trim().split(" ")).filter(item => item.length !== 1)
             dispatch({
                 type: SET_CALCULATIONS_FILE,
-                input_length_values,
                 results
             })
             setIsFileSet(true)
@@ -60,7 +61,7 @@ const FileInput = () => {
                 />
             </div>
             <br/>
-            {!isFileSet ? null : <Link to={{pathname: location.state?.fromMain ? "/main-analysis-input-fields" : "/pre-analysis-input-fields"}}><button>Далее</button></Link>}
+            {!isFileSet ? null : <Link to={{pathname: location.state?.fromMain ? "/main-analysis-input-fields" : "/pre-analysis"}}><button>Далее</button></Link>}
         </div>
     )
 }

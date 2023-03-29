@@ -1,5 +1,11 @@
+@import '../../styles/mixins.scss';
+
 .results-container {
     height: 100%;
+    button {
+        margin-top: 10px;
+        @include button;
+    }
 }
 
 .graph-container {

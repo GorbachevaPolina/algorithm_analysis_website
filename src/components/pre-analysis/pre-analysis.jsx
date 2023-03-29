@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import "./pre-analysis.scss"
 import { analysis } from '../../utils/pre-analysis';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { Link } from 'react-router-dom';
 
 const PreAnalysis = () => {
     const parameters = useSelector((store) => store.preAnalysis);
@@ -11,7 +13,7 @@ const PreAnalysis = () => {
 
     const startAnalysis = async () => {
         setCanAnalyse(true)
-        let results = await analysis(parameters)
+        let results = await analysis(parameters.results)
         setResultData(results)
         setIsDone(true)
     }
@@ -29,8 +31,7 @@ const PreAnalysis = () => {
     }, [canAnalyse])
 
     return (
-        <div>
-            <div className="results-container">
+            <div className="pre-results-container">
             {
                 canAnalyse === false ? 
                     <p>Ошибка в параметрах.</p> :
@@ -42,7 +43,7 @@ const PreAnalysis = () => {
                 resultData ?
                 (
                     <>
-                    <div className="graph-container">
+                    <div className="pre-graph-container">
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart
                         data={resultData[0]}
@@ -62,11 +63,12 @@ const PreAnalysis = () => {
                         </BarChart>
                     </ResponsiveContainer>
                     </div>
-                    <p>Результат функции ХИ2: {resultData[1].probability}</p>
+                    <p className='xi-result'>Результат функции ХИ2: {resultData[1].probability}</p>
+                    <p>Если значение ХИ2 достаточно большое, то можно приступать к основному этапу.</p>
+                    <Link to="/prepare-analysis" state={{fromMain: true}}><button>К основному этапу</button></Link>
                     </>
                 ) : null
             }
-        </div>
         </div>
     )
 }
