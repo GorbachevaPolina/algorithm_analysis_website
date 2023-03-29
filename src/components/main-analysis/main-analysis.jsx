@@ -48,7 +48,6 @@ const MainAnalysis = () => {
             setCanAnalyse(false)
         } else {
             setCanAnalyse(true)
-            // startAnalysis()
         }
     }, [parameters])
 

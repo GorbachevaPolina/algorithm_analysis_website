@@ -1,4 +1,4 @@
-import { SET_FILE, SET_PRE_ANALYSIS_PARAMETER } from "../actions/pre-analysis"
+import { SET_FILE } from "../actions/pre-analysis"
 
 const initialState = {
     results: null

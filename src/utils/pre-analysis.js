@@ -12,7 +12,7 @@ export const analysis = async (results) => {
     let k = Math.ceil(Math.sqrt(results.length))
     // let k = Math.ceil(1 + 3.322 * Math.log10(results.length))
 
-    let i = 0, h = (Math.max(...normalised_results.filter((item => item !== 1))) - Math.min(...normalised_results.filter((item) => item !== 0)))/k, count = 0;
+    let h = (Math.max(...normalised_results.filter((item => item !== 1))) - Math.min(...normalised_results.filter((item) => item !== 0)))/k, count = 0;
     let frequency = [], hist_data = [];
     // let s = Math.min(...normalised_results.filter((item) => item !== 0)), f = s + h
     let s = 0, f = Math.min(...normalised_results.filter((item) => item !== 0)) + count * h

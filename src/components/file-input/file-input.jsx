@@ -1,9 +1,7 @@
-import React, {FC, useRef, useState} from "react";
-import { test } from "../../test";
+import React, {useState} from "react";
 import { useDispatch } from 'react-redux'
 import { SET_CALCULATIONS_FILE } from "../../services/actions/calculations-file";
 import { SET_FILE } from "../../services/actions/pre-analysis";
-import InputFields from '../input-fields/input-fields'
 import './file-input.scss'
 import { Link, useLocation } from "react-router-dom";
 
@@ -12,19 +10,12 @@ const FileInput = () => {
     const dispatch = useDispatch()
     let location = useLocation();
 
-    // const testFunc = async () => {
-    //     await test(file)
-    //   }
-
     const readMainFile = async (e) => {
         e.preventDefault()
         const reader = new FileReader()
         reader.onload = async (e) => { 
             const text = (e.target.result)
             const result_arrays = text.split('\r')
-            const input_length_values = []
-            // const input_length_values = result_arrays.filter((item, idx) => idx % 2 === 0).map(item => item.trim())
-            // const results = result_arrays.filter((item, idx) => idx % 2 !== 0).map(item => item.trim().split(" "))
             const results = result_arrays.map(item => item.trim().split(" ")).filter(item => item.length !== 1)
             dispatch({
                 type: SET_CALCULATIONS_FILE,

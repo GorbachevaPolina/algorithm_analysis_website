@@ -1,13 +1,11 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { SET_ANALYSIS_PARAMETERS } from '../../services/actions/calculations-file'
-import MainAnalysis from '../main-analysis/main-analysis'
 import "./input-fields.scss"
 import { Link } from 'react-router-dom'
 
 const InputFields = () => {
     const dispatch = useDispatch()
-    const [analysisStarted, setAnalysisStarted] = useState(false)
     const [inputs, setInputs] = useState({
         left_segment: "",
         right_segment_exp: "",
@@ -22,7 +20,6 @@ const InputFields = () => {
             inputs,
             started: true
         })
-        setAnalysisStarted(true)
     }
 
     return(
@@ -76,11 +73,6 @@ const InputFields = () => {
             <Link to="/main-analysis">
             <button onClick={startAnalysis}>Провести анализ</button>
             </Link>
-            {/* {
-                analysisStarted ?
-                <MainAnalysis /> :
-                null
-            } */}
         </div>
     )
 }
