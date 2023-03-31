@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect, FC } from 'react'
+import { useSelector } from '../../utils/types/hooks'
 import "./pre-analysis.scss"
 import { analysis } from '../../utils/pre-analysis';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Link } from 'react-router-dom';
+import { TPreResults } from '../../utils/types/types';
 
-const PreAnalysis = () => {
+const PreAnalysis: FC = () => {
     const parameters = useSelector((store) => store.preAnalysis);
-    const [canAnalyse, setCanAnalyse] = useState(null)
-    const [isDone, setIsDone] = useState(false)
-    const [resultData, setResultData] = useState(null)
+    const [canAnalyse, setCanAnalyse] = useState<boolean | null>(null)
+    const [isDone, setIsDone] = useState<boolean>(false)
+    const [resultData, setResultData] = useState<TPreResults | null>(null)
 
     const startAnalysis = async () => {
-        setCanAnalyse(true)
-        let results = await analysis(parameters.results)
-        setResultData(results)
-        setIsDone(true)
+        if(parameters.results !== null) {
+            setCanAnalyse(true)
+            let results = await analysis(parameters.results)
+            setResultData(results)
+            setIsDone(true)
+        }
     }
 
     useEffect(() => {
-        if(parameters.input_length === "") {
+        if(parameters.results === null) {
             setCanAnalyse(false)
         } else {
             setCanAnalyse(true)
@@ -63,7 +66,7 @@ const PreAnalysis = () => {
                         </BarChart>
                     </ResponsiveContainer>
                     </div>
-                    <p className='xi-result'>Результат функции ХИ2: {resultData[1].probability}</p>
+                    <p className='xi-result'>Результат функции ХИ2: {resultData[1]}</p>
                     <p>Если значение ХИ2 достаточно большое, то можно приступать к основному этапу.</p>
                     <Link to="/prepare-analysis" state={{fromMain: true}}><button>К основному этапу</button></Link>
                     </>

@@ -1,12 +1,13 @@
-import React, {useState} from 'react'
-import { useDispatch } from 'react-redux'
+import React, {FC, useState} from 'react'
+import { useDispatch } from '../../utils/types/hooks'
 import { SET_ANALYSIS_PARAMETERS } from '../../services/actions/calculations-file'
 import "./input-fields.scss"
 import { Link } from 'react-router-dom'
+import { IInputs } from '../../utils/types/types'
 
-const InputFields = () => {
+const InputFields: FC = () => {
     const dispatch = useDispatch()
-    const [inputs, setInputs] = useState({
+    const [inputs, setInputs] = useState<IInputs>({
         left_segment: "",
         right_segment_exp: "",
         right_segment_res: "",

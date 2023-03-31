@@ -1,18 +1,19 @@
-import React, {useEffect, useState} from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, {FC, useEffect, useState} from "react";
+import { useSelector, useDispatch } from "../../utils/types/hooks";
 import { analysis } from "../../utils/main-analysis";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import './main-analysis.scss'
 import { Link } from "react-router-dom";
 import { SET_ANALYSIS_PARAMETERS, SET_CALCULATIONS_FILE } from "../../services/actions/calculations-file";
 import { SET_FILE } from "../../services/actions/pre-analysis";
+import { TMainAnalysisResults } from "../../utils/types/types";
 
-const MainAnalysis = () => {
+const MainAnalysis: FC = () => {
     const parameters = useSelector((store) => store.calculationsFile)
     const dispatch = useDispatch()
-    const [canAnalyse, setCanAnalyse] = useState(null)
-    const [isDone, setIsDone] = useState(false)
-    const [resultData, setResultData] = useState(null)
+    const [canAnalyse, setCanAnalyse] = useState<boolean | null>(null)
+    const [isDone, setIsDone] = useState<boolean>(false)
+    const [resultData, setResultData] = useState<null | TMainAnalysisResults[]>(null)
 
     const startAnalysis = async () => {
         setCanAnalyse(true)
@@ -29,11 +30,11 @@ const MainAnalysis = () => {
         dispatch({
             type: SET_ANALYSIS_PARAMETERS,
             inputs: {
-                left_segment: null,
-                right_segment_exp: null,
-                right_segment_res: null,
-                step: null,
-                probability: null
+                left_segment: "",
+                right_segment_exp: "",
+                right_segment_res: "",
+                step: "",
+                probability: ""
             },
             started: false
         })
@@ -44,7 +45,7 @@ const MainAnalysis = () => {
     }
 
     useEffect(() => {
-        if(Object.values(parameters).includes(null) || Object.values(parameters).includes("")) {
+        if(Object.values(parameters).includes("")) {
             setCanAnalyse(false)
         } else {
             setCanAnalyse(true)

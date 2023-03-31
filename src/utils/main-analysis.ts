@@ -1,8 +1,10 @@
 import * as stat from 'simple-statistics'
 import regression from 'regression';
+import { TMainState } from '../services/reducers/calculations-file';
+import { TMainAnalysisResults } from './types/types';
 let quantile = require( '@stdlib/stats-base-dists-beta-quantile' );
 
-export const analysis = async (params) => {
+export const analysis = async (params: TMainState): Promise<TMainAnalysisResults[]> => {
     let {
         left_segment,
         probability,
@@ -13,24 +15,24 @@ export const analysis = async (params) => {
     } = params;
 
     let input_lengths = []
-    for (let i = 0; i < (+right_segment_exp - +left_segment + 1); i+=+step) {
+    for (let i = 0; i < (+right_segment_exp - +left_segment + 1); i += +step) {
         input_lengths.push(i)
     }
-    let normalised_results = []
-    let min_array = [], max_array = []
-    for (let i = 0; i < results.length; i++) {
-        min_array.push(Math.min(...results[i]))
+    let normalised_results: number[][] = []
+    let min_array: number[] = [], max_array: number[] = []
+    for (let i = 0; i < results!.length; i++) {
+        min_array.push(Math.min(...results![i].map(item => +item)))
         // min_array.push(Math.min(...results[i].filter(item => +item)));
-        max_array.push(Math.max(...results[i]))
-        normalised_results.push(results[i].map((item) => {
-            return (item - min_array[i]) / (max_array[i] - min_array[i])
+        max_array.push(Math.max(...results![i].map(item => +item)))
+        normalised_results.push(results![i].map((item) => {
+            return (+item - min_array[i]) / (max_array[i] - min_array[i])
         }))
     }
 
-    let t = [], s = [], regression_data_t = [], regression_data_s = []
-    let min_regression_data = [], max_regression_data = []
+    let t = [], s = [], regression_data_t: [number, number][] = [], regression_data_s: [number, number][] = []
+    let min_regression_data: [number, number][] = [], max_regression_data: [number, number][] = []
 
-    for (let i = 0; i < results.length; i++) {
+    for (let i = 0; i < results!.length; i++) {
         min_regression_data.push([input_lengths[i], min_array[i]])
         max_regression_data.push([input_lengths[i], max_array[i]])
 

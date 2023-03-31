@@ -1,11 +1,12 @@
 import * as stat from 'simple-statistics'
+import { TPreResults } from './types/types';
 var betainc = require( '@stdlib/math-base-special-betainc' );
 var chiSquaredTest = require('chi-squared-test');
 
-export const analysis = async (results) => {
+export const analysis = async (results: string[]): Promise<TPreResults> => {
 
-    let min_value = Math.min(...results);
-    let max_value = Math.max(...results);
+    let min_value = Math.min(...results.map(item => +item));
+    let max_value = Math.max(...results.map(item => +item));
 
     let normalised_results = results.map((item) => (+item - min_value) / (max_value - min_value))
 
@@ -58,6 +59,6 @@ export const analysis = async (results) => {
     let cut_data = frequency.slice(0, cut_th_data.length)
 
     let chi_squared = chiSquaredTest(cut_data, cut_th_data, 3)
-    return [hist_data, chi_squared]
+    return [hist_data, chi_squared.probability]
       
 }

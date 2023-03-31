@@ -1,18 +1,29 @@
-import { SET_ANALYSIS_PARAMETERS, SET_CALCULATIONS_FILE } from "../actions/calculations-file"
+import { SET_ANALYSIS_PARAMETERS, SET_CALCULATIONS_FILE, TMainAnalysisActions } from "../actions/calculations-file"
 
-const initialState = {
+export type TMainState = {
+    results: string[][] | null;
+    left_segment: string,
+    right_segment_exp: string,
+    right_segment_res: string,
+    step: string,
+    probability: string,
+
+    analysisStarted: boolean
+}
+
+const initialState: TMainState = {
     results: null,
 
-    left_segment: null,
-    right_segment_exp: null,
-    right_segment_res: null,
-    step: null,
-    probability: null,
+    left_segment: "",
+    right_segment_exp: "",
+    right_segment_res: "",
+    step: "",
+    probability: "",
 
     analysisStarted: false
 }
 
-export const calculationsFileReducer = (state = initialState, action) => {
+export const calculationsFileReducer = (state = initialState, action: TMainAnalysisActions): TMainState => {
     switch(action.type) {
         case SET_CALCULATIONS_FILE: {
             return {

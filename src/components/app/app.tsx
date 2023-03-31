@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './app.scss';
 import FileInput from '../file-input/file-input';
 import MainAnalysis from '../main-analysis/main-analysis';
@@ -7,7 +7,7 @@ import AnalysisType from '../analysis-type/analysis-type';
 import InputFields from '../input-fields/input-fields';
 import PreAnalysis from '../pre-analysis/pre-analysis';
 
-function App() {
+const App: FC = () => {
   return (
     <div className="app-container">
       <BrowserRouter>
