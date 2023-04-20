@@ -11,11 +11,9 @@ export const analysis = async (results: string[]): Promise<TPreResults> => {
     let normalised_results = results.map((item) => (+item - min_value) / (max_value - min_value))
 
     let k = Math.ceil(Math.sqrt(results.length))
-    // let k = Math.ceil(1 + 3.322 * Math.log10(results.length))
 
     let h = (Math.max(...normalised_results.filter((item => item !== 1))) - Math.min(...normalised_results.filter((item) => item !== 0)))/k, count = 0;
     let frequency = [], hist_data = [];
-    // let s = Math.min(...normalised_results.filter((item) => item !== 0)), f = s + h
     let s = 0, f = Math.min(...normalised_results.filter((item) => item !== 0)) + count * h
 
     let mean = stat.mean(normalised_results);
@@ -48,13 +46,6 @@ export const analysis = async (results: string[]): Promise<TPreResults> => {
         f = Math.min(...normalised_results.filter((item) => item !== 0)) + count * h
     }
 
-    // const testData = [0.003420240544, 0.003591813051, 0.003763385557, 0.003934958063, 0.004106530569, 0.004278103075, 0.004449675582, 0.004621248088, 0.004792820594, 0.0049643931, 0.005135965606, 0.005307538113, 0.005479110619, 0.005650683125, 0.005822255631, 0.005993828137]
-    // const testA = 198.4086223, testB = 41697.29048
-    // const testThF = testData.map((item, idx) => {
-    //     if (idx == 0) return betainc(item, testA, testB)
-    //     return betainc(item, testA, testB) - betainc(testData[idx-1], testA, testB)
-    // })
-    // console.log(testThF)
     let cut_th_data = theoretical_frequency.filter(item => item !== 0)
     let cut_data = frequency.slice(0, cut_th_data.length)
 

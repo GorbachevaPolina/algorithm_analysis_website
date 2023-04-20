@@ -14,25 +14,10 @@
 
     button {
         @include button;
-        // left: 50%;
-        // position: relative;
-        // transform: translate(-50%);
-        // background-color: #e2f6ff;
-        // border: none;
-        // border-radius: 5px;
-        // padding: 5px 15px;
-        // font-size: 1.1rem;
-        // transition: .5s;
-
-        // &:hover {
-        //     cursor: pointer;
-        //     background-color: #cfe2ea;
-        // }
     }
 
     .input-container {
         border: 1px solid #e5e5e5;
-        // display: inline-block;
         input[type=file]::file-selector-button {
             background-color: #e2f6ff;
             color: #000;
